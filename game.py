@@ -28,11 +28,14 @@ bg_img = pygame.image.load('media/sky.png')
 player = Player.Player(100,0)
 game_over = 0
 
+level = 0
+# load in level data and create world
+World = World.World(level)
 run = True
 while (run): # this keeps the window up for now, replace with main game loop eventually
     clock.tick(fps)
     
     screen.blit(bg_img, (0,0))
-
+    World.draw(screen)
     game_over = player.update(game_over,screen)
     pygame.display.update()
