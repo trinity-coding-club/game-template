@@ -1,19 +1,20 @@
 import pygame
+
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, images, dead_image, jump_fx=None, game_over_fx=None):
+    def __init__(self, x, y, jump_fx=None, game_over_fx=None):
         super().__init__()
-        self.images_right, self.images_left = images
-        self.dead_image = dead_image
+        self.images_right, self.images_left, self.dead_image = self.load_player_images()
         self.jump_fx = jump_fx
         self.game_over_fx = game_over_fx
         self.reset(x, y)
 
-    def update(self, game_over, world, blob_group, lava_group, exit_group, platform_group, screen):
+    def update(self, game_over, screen):
+         #add this into args^ world, blob_group, lava_group, exit_group, platform_group,
         if game_over == 0:
             self.handle_input()
             self.handle_animation()
             self.apply_gravity()
-            game_over = self.check_collisions(world, blob_group, lava_group, exit_group, platform_group)
+            #game_over = self.check_collisions(world, blob_group, lava_group, exit_group, platform_group)
             self.update_position()
         elif game_over == -1:
             self.handle_game_over()
@@ -160,15 +161,15 @@ class Player(pygame.sprite.Sprite):
         self.dx = 0
         self.dy = 0
 
-# Helper function to load images
-def load_player_images():
-    images_right = []
-    images_left = []
-    for num in range(1, 5):
-        img_right = pygame.image.load(f'img/guy{num}.png')
-        img_right = pygame.transform.scale(img_right, (40, 80))
-        img_left = pygame.transform.flip(img_right, True, False)
-        images_right.append(img_right)
-        images_left.append(img_left)
-    dead_image = pygame.image.load('img/ghost.png')
-    return images_right, images_left, dead_image
+    @staticmethod
+    def load_player_images():
+        images_right = []
+        images_left = []
+        for num in range(1, 5):
+            img_right = pygame.image.load(f'media/guy{num}.png')
+            img_right = pygame.transform.scale(img_right, (40, 80))
+            img_left = pygame.transform.flip(img_right, True, False)
+            images_right.append(img_right)
+            images_left.append(img_left)
+        dead_image = pygame.image.load('media/ghost.png')
+        return images_right, images_left, dead_image

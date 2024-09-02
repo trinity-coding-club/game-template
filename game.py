@@ -23,9 +23,10 @@ pygame.display.set_caption('Platformer')
 
 # window background
 
-bg_img = pygame.image.load('img/sky.png')
+bg_img = pygame.image.load('media/sky.png')
 
-player = Player()
+player = Player.Player(100,0)
+game_over = 0
 
 run = True
 while (run): # this keeps the window up for now, replace with main game loop eventually
@@ -33,5 +34,5 @@ while (run): # this keeps the window up for now, replace with main game loop eve
     
     screen.blit(bg_img, (0,0))
 
-    game_over = player.update(game_over)
+    game_over = player.update(game_over,screen)
     pygame.display.update()
