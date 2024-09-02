@@ -1,6 +1,7 @@
 import pygame
 
 class Player(pygame.sprite.Sprite):
+    # Contructor
     def __init__(self, x, y, jump_fx=None, game_over_fx=None):
         super().__init__()
         self.images_right, self.images_left, self.dead_image = self.load_player_images()
@@ -8,6 +9,8 @@ class Player(pygame.sprite.Sprite):
         self.game_over_fx = game_over_fx
         self.reset(x, y)
 
+    
+    # Runs in main game loop
     def update(self, game_over, screen):
          #add this into args^ world, blob_group, lava_group, exit_group, platform_group,
         if game_over == 0:
@@ -161,6 +164,7 @@ class Player(pygame.sprite.Sprite):
         self.dx = 0
         self.dy = 0
 
+    # Static because doesn't need to access any player instances
     @staticmethod
     def load_player_images():
         images_right = []

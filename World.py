@@ -1,3 +1,4 @@
+import pygame
 class World():
     def __init__(self, data):
         self.tile_list = []
