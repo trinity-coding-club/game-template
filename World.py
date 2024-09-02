@@ -1,9 +1,10 @@
 import pygame
 import pickle
 from os import path
+import Platform
 
 class World():
-    def __init__(self, level):
+    def __init__(self, level,platform_group):
         # Initializig world variables
         self.tile_list = []
         data = self.get_data_from_file(level)
@@ -37,14 +38,14 @@ class World():
                 #     blob = Enemy(col_count * tile_size,
                 #                  row_count * tile_size + 15)
                 #     blob_group.add(blob)
-                # if tile == 4:
-                #     platform = Platform(
-                #         col_count * tile_size, row_count * tile_size, 1, 0)
-                #     platform_group.add(platform)
-                # if tile == 5:
-                #     platform = Platform(
-                #         col_count * tile_size, row_count * tile_size, 0, 1)
-                #     platform_group.add(platform)
+                if tile == 4:
+                    platform = Platform(
+                        col_count * tile_size, row_count * tile_size, 1, 0,tile_size)
+                    platform_group.add(platform)
+                if tile == 5:
+                    platform = Platform(
+                        col_count * tile_size, row_count * tile_size, 0, 1,tile_size)
+                    platform_group.add(platform)
                 # if tile == 6:
                 #     lava = Lava(col_count * tile_size, row_count *
                 #                 tile_size + (tile_size // 2))

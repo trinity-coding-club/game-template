@@ -1,6 +1,6 @@
 import pygame
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, x, y, move_x, move_y):
+    def __init__(self, x, y, move_x, move_y, tile_size):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('img/platform.png')
         self.image = pygame.transform.scale(img, (tile_size, tile_size // 2))
@@ -14,7 +14,7 @@ class Platform(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.x += self.move_direction * self.move_x
-        self.rect.y += self.move_direction * self.move_y
+        self.rect.y += self.move_direction * self.move_ys
         self.move_counter += 1
         if abs(self.move_counter) > 50:
             self.move_direction *= -1

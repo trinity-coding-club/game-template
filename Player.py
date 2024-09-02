@@ -11,13 +11,13 @@ class Player(pygame.sprite.Sprite):
 
     
     # Runs in main game loop
-    def update(self, game_over, screen):
+    def update(self, game_over, screen,world, platform_group):
          #add this into args^ world, blob_group, lava_group, exit_group, platform_group,
         if game_over == 0:
             self.handle_input()
             self.handle_animation()
             self.apply_gravity()
-            #game_over = self.check_collisions(world, blob_group, lava_group, exit_group, platform_group)
+            game_over = self.check_collisions(world, platform_group)
             self.update_position()
         elif game_over == -1:
             self.handle_game_over()
@@ -70,15 +70,21 @@ class Player(pygame.sprite.Sprite):
         self.vel_y = min(self.vel_y + 1, 10)
         self.dy = self.vel_y
 
-    def check_collisions(self, world, blob_group, lava_group, exit_group, platform_group):
+    def check_collisions(self, world, platform_group):
         self.in_air = True
-        game_over = self.check_enemy_collisions(blob_group) or \
-                    self.check_lava_collisions(lava_group) or \
-                    self.check_exit_collisions(exit_group)
+        # Defo simplify this to general enemy collsion
+        # game_over = self.check_enemy_collisions(blob_group) or \
+        #             self.check_lava_collisions(lava_group) or \
+        #             self.check_exit_collisions(exit_group)
 
+
+
+        #Line below cause player not to load
         self.check_tile_collisions(world)
         self.check_platform_collisions(platform_group)
 
+        #Make game over bool?
+        game_over =0
         return game_over
 
     def check_tile_collisions(self, world):
@@ -147,7 +153,7 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
-
+    # Resets all important player variables
     def reset(self, x, y):
         self.index = 0
         self.counter = 0
