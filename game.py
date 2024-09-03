@@ -1,13 +1,7 @@
 import pygame
 from pygame.locals import *
 from pygame import mixer
-import pickle
-from os import path
 
-from coin import Coin
-from enemy import Enemy
-from exit import Exit
-from lava import Lava
 from player import Player
 from world import World
 

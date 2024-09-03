@@ -39,6 +39,7 @@ class World():
         grass_img = pygame.image.load('media/grass.png')
 
         # iterate through world_data and read each cell of the grid
+        # TODO make this more readable
         row_count = 0
         for row in world_data:
             col_count = 0
