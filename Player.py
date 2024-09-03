@@ -74,7 +74,7 @@ class Player(pygame.sprite.Sprite):
         self.in_air = True
         # Defo simplify this to general enemy collsion
         # game_over = self.check_enemy_collisions(blob_group) or \
-        #             self.check_lava_collisions(lava_group) or \
+        #             self.check_enemy_collisions(lava_group) or \
         #             self.check_exit_collisions(exit_group)
 
 
@@ -106,14 +106,8 @@ class Player(pygame.sprite.Sprite):
                 self.vel_y = 0
                 self.in_air = False
 
-    def check_enemy_collisions(self, blob_group):
-        if pygame.sprite.spritecollide(self, blob_group, False):
-            if self.game_over_fx:
-                self.game_over_fx.play()
-            return -1
-
-    def check_lava_collisions(self, lava_group):
-        if pygame.sprite.spritecollide(self, lava_group, False):
+    def check_enemy_collisions(self, enemy):
+        if pygame.sprite.spritecollide(self, enemy, False):
             if self.game_over_fx:
                 self.game_over_fx.play()
             return -1
@@ -152,6 +146,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.y -= 5
 
     def draw(self, screen):
+        print("Draw")
         screen.blit(self.image, self.rect)
     # Resets all important player variables
     def reset(self, x, y):

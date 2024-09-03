@@ -3,7 +3,7 @@ from pygame.locals import *
 from pygame import mixer
 import pickle
 from os import path
-import Player, Enemy, Exit, Lava, Coin, World
+import Player, World, Enemy, Exit, Lava, Coin
 
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
@@ -45,7 +45,6 @@ while (run): # this keeps the window up for now, replace with main game loop eve
     screen.blit(bg_img, (0,0))
     world.draw(screen)
     platform_group.draw(screen)
-    player.draw(screen)
     
     
     game_over = player.update(game_over,screen,world, platform_group)
