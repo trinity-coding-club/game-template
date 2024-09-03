@@ -26,19 +26,14 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Platformer')
 bg_img = pygame.image.load('media/sky.png')
 
-# initialise sprites
-#Provisional ( probably can be improved)
-blob_group = pygame.sprite.Group() # blobs are enemies
-platform_group = pygame.sprite.Group()
-lava_group = pygame.sprite.Group()
-coin_group = pygame.sprite.Group()
-exit_group = pygame.sprite.Group()
+# initialise player
 player = Player(100,0)
 
-# create world
+# initialise world
+level_num = 0
+world = World(level_num)
+
 game_over = 0
-level = 0
-world = World(level, platform_group)
 
 # main game loop
 run = True
@@ -50,11 +45,11 @@ while (run): # this keeps the window up for now, replace with main game loop eve
         if event.type == pygame.QUIT:
             run = False 
     
-    # draw the background, world, and sprites onto the screen
+    # draw the background and world onto the screen
     screen.blit(bg_img, (0,0))
     world.draw(screen)
     
-    game_over = player.update(game_over,screen,world, platform_group)
+    game_over = player.update(game_over, screen, world)
 
     # finally, update the screen with everything that has been drawn
     pygame.display.update()

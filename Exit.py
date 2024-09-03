@@ -1,7 +1,7 @@
 import pygame
 
 class Exit(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, tile_size):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('media/exit.png')
         self.image = pygame.transform.scale(

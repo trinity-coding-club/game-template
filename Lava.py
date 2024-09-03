@@ -1,7 +1,7 @@
 import pygame
 
 class Lava(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, tile_size):
         pygame.sprite.Sprite.__init__(self)
         img = pygame.image.load('media/lava.png')
         self.image = pygame.transform.scale(img, (tile_size, tile_size // 2))
