@@ -1,6 +1,7 @@
 import pygame
 
 class Player(pygame.sprite.Sprite):
+    
     # Contructor
     def __init__(self, x, y, jump_fx=None, game_over_fx=None):
         super().__init__()

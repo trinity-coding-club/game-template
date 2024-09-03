@@ -4,7 +4,7 @@ from os import path
 from world_platform import Platform
 
 class World():
-    def __init__(self, level,platform_group):
+    def __init__(self, level, platform_group):
         # Initializig world variables
         self.tile_list = []
         data = self.get_data_from_file(level)
