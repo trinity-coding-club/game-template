@@ -27,7 +27,7 @@ pygame.display.set_caption('Platformer')
 bg_img = pygame.image.load('media/sky.png')
 
 # initialise player
-player = Player(100,0)
+player = Player(50,50)
 
 # initialise world
 level_num = 0
@@ -45,9 +45,10 @@ while (run): # this keeps the window up for now, replace with main game loop eve
         if event.type == pygame.QUIT:
             run = False 
     
-    # draw the background and world onto the screen
+    # draw the background, world and player onto the screen
     screen.blit(bg_img, (0,0))
     world.draw(screen)
+    player.draw(screen)
     
     game_over = player.update(game_over, screen, world)
 
