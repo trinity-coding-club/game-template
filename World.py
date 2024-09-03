@@ -1,10 +1,24 @@
 import pygame
-import pickle
 from os import path
+import csv
+
 from world_platform import Platform
 
 class World():
+    """
+    The game world, made up of tiles.
+    
+    Parameters:
+        level: The number of the level file to read from to construct the world (e.g. 0 for level0.txt)
+        platform_group: the platform_group to add the world tiles to
+    """
+
     def __init__(self, level, platform_group):
+        """
+        Create a world by reading level data from a file and converting it to a list 
+        of tiles to be drawn on the screen.
+        """
+
         # Initializig world variables
         self.tile_list = []
         data = self.get_data_from_file(level)
@@ -62,20 +76,28 @@ class World():
             row_count += 1
 
     def draw(self, screen):
+        """Draw the world on the screen."""
         for tile in self.tile_list:
             screen.blit(tile[0], tile[1])
 
     @staticmethod  
-    def get_data_from_file(level):
-        if path.exists(f'levels/level{level}.txt'):
-            pickle_in = open(f'levels/level{level}.txt', 'r')
+    def get_data_from_file(level_num):
+        """
+        Read level data from a csv file into a list.
+        
+        Parameters:
+            level_num: The number of the level file to read from, e.g. 0 for levels0.csv
+        Returns:
+            world_data: A 2D int array representing the tile grid that makes up the world. 
+            Each internal array represents a row of the tile grid.
+        """
+        
+        if path.exists(f'levels/level{level_num}.csv'):
             world_data = []
-            for l in pickle_in:
-                temp = []
-                s_temp = l.strip().split(',')
-            
-                temp = [int(s) for s in s_temp]
-            
-                world_data.append(temp)
+            with open(f'levels/level{level_num}.csv', 'r') as level_file:
+                for line in csv.reader(level_file):
+                    world_data.append([int(x) for x in line])
+        else:
+            raise FileNotFoundError(f"levels/level{level_num}.csv")
             
         return world_data

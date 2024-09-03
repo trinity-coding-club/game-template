@@ -28,17 +28,17 @@ bg_img = pygame.image.load('media/sky.png')
 
 # initialise sprites
 #Provisional ( probably can be improved)
-blob_group = pygame.sprite.Group()
+blob_group = pygame.sprite.Group() # blobs are enemies
 platform_group = pygame.sprite.Group()
 lava_group = pygame.sprite.Group()
 coin_group = pygame.sprite.Group()
 exit_group = pygame.sprite.Group()
 player = Player(100,0)
 
+# create world
 game_over = 0
 level = 0
-# load in level data and create world
-world = World(level,platform_group)
+world = World(level, platform_group)
 
 # main game loop
 run = True
@@ -50,14 +50,13 @@ while (run): # this keeps the window up for now, replace with main game loop eve
         if event.type == pygame.QUIT:
             run = False 
     
-    # drawing the display
+    # draw the background, world, and sprites onto the screen
     screen.blit(bg_img, (0,0))
     world.draw(screen)
-    platform_group.draw(screen)
-    
     
     game_over = player.update(game_over,screen,world, platform_group)
 
+    # finally, update the screen with everything that has been drawn
     pygame.display.update()
 
 pygame.quit()
