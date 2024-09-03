@@ -146,7 +146,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.y -= 5
 
     def draw(self, screen):
-        print("Draw")
+        # print("Draw")
         screen.blit(self.image, self.rect)
     # Resets all important player variables
     def reset(self, x, y):

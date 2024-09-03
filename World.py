@@ -1,7 +1,7 @@
 import pygame
 import pickle
 from os import path
-import Platform
+from world_platform import Platform
 
 class World():
     def __init__(self, level,platform_group):
