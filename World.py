@@ -98,6 +98,10 @@ class World():
         self.exit_group.draw(screen)
         self.platform_group.draw(screen)
 
+    def update(self):
+        self.enemy_group.update()
+        self.platform_group.update()
+
     def get_platform_group(self):
         return self.platform_group;
 

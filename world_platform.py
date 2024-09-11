@@ -15,7 +15,7 @@ class Platform(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.x += self.move_direction * self.move_x
-        self.rect.y += self.move_direction * self.move_ys
+        self.rect.y += self.move_direction * self.move_y
         self.move_counter += 1
         if abs(self.move_counter) > 50:
             self.move_direction *= -1
