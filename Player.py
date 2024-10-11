@@ -1,7 +1,7 @@
 import pygame
 
 class Player(pygame.sprite.Sprite):
-    
+
     # Contructor
     def __init__(self, x, y, jump_fx=None, game_over_fx=None):
         super().__init__()
@@ -10,7 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.game_over_fx = game_over_fx
         self.reset(x, y)
 
-    
+
     # Runs in main game loop
     def update(self, game_over, screen, world):
          #add this into args^ world, blob_group, lava_group, exit_group, platform_group,
@@ -22,7 +22,7 @@ class Player(pygame.sprite.Sprite):
             self.update_position()
         elif game_over == -1:
             self.handle_game_over()
-        
+
         self.draw(screen)
         return game_over
 
@@ -45,7 +45,7 @@ class Player(pygame.sprite.Sprite):
             self.counter = 0
             self.index = 0
             self.update_image()
-        
+
         self.dx = dx
 
     def jump(self):

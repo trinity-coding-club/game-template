@@ -2,8 +2,8 @@ import pygame
 from pygame.locals import *
 from pygame import mixer
 
-from player import Player
-from world import World
+from Player import Player
+from World import World
 
 # audio
 pygame.mixer.pre_init(44100, -16, 2, 512) # TODO this configures sound, keep or remove
@@ -37,13 +37,13 @@ while (run): # this keeps the window up for now, replace with main game loop eve
     # event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False 
-    
+            run = False
+
     # draw the background, world and player onto the screen
     screen.blit(bg_img, (0,0))
     world.draw(screen)
     player.draw(screen)
-    
+
     # update the player and the world
     game_over = player.update(game_over, screen, world)
     world.update()

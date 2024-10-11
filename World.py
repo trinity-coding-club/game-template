@@ -3,15 +3,15 @@ from os import path
 import csv
 
 from world_platform import Platform
-from enemy import Enemy
-from lava import Lava
-from exit import Exit
-from coin import Coin
+from Enemy import Enemy
+from Lava import Lava
+from Exit import Exit
+from Coin import Coin
 
 class World():
     """
     The game world, made up of tiles, platforms, lava, enemies, coins, and a single exit.
-    
+
     Parameters:
         level: The number of the level file to read from to construct the world (e.g. 0 for level0.txt)
     """
@@ -103,20 +103,20 @@ class World():
         self.platform_group.update()
 
     def get_platform_group(self):
-        return self.platform_group;
+        return self.platform_group
 
-    @staticmethod  
+    @staticmethod
     def get_data_from_file(level_num):
         """
         Read level data from a csv file into a list.
-        
+
         Parameters:
             level_num: The number of the level file to read from, e.g. 0 for levels0.csv
         Returns:
-            world_data: A 2D int array representing the tile grid that makes up the world. 
+            world_data: A 2D int array representing the tile grid that makes up the world.
             Each internal array represents a row of the tile grid.
         """
-        
+
         if path.exists(f'levels/level{level_num}.csv'):
             world_data = []
             with open(f'levels/level{level_num}.csv', 'r') as level_file:
@@ -124,5 +124,5 @@ class World():
                     world_data.append([int(x) for x in line])
         else:
             raise FileNotFoundError(f"levels/level{level_num}.csv")
-            
+
         return world_data
