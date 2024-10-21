@@ -86,12 +86,16 @@ class Player(pygame.sprite.Sprite):
 
         # Check enemy or lava collisions (with delay)
         if current_time - self.last_enemy_collision_time >= self.enemy_collision_delay:
-            if self.check_enemy_collisions(world.enemy_group) or self.check_enemy_collisions(world.lava_group):
+            if self.check_enemy_collisions(world.enemy_group):
                 self.health -= 20  # Take damage on enemy collision
                 self.last_enemy_collision_time = current_time  # Update last enemy collision time
-                if self.health <= 0:
-                    return True  # Game over (health is zero or less)
-                
+
+        if self.check_enemy_collisions(world.lava_group):
+            self.health = 0
+
+        if self.health <= 0:
+            return True  # Game over (health is zero or less)
+
         self.check_coin_collisions(world.coin_group)
 
         # Handle exit collision (no delay needed here)

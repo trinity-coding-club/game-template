@@ -39,14 +39,13 @@ world = World(level_num)
 game_over = False
 
 # main game loop
-run = True
-while (run): # this keeps the window up for now, replace with main game loop eventually
+while True: # this keeps the window up for now, replace with main game loop eventually
     clock.tick(fps) # cap the frame rate at 60 fps
 
     # event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run = False 
+            break
     
     # draw the background, world and player onto the screen
     screen.blit(bg_img, (0,0))
@@ -61,10 +60,12 @@ while (run): # this keeps the window up for now, replace with main game loop eve
     if game_over == 'level_completed':
         level_num += 1
         if level_num > max_levels:
+            surface = pygame.display.set_mode((screen_width, screen_height))
+            surface.fill((0,0,0 ))
             draw_text('Game Completed!', font, (255, 255, 0), screen_width // 2 - 100, screen_height // 2)
             pygame.display.update()
             pygame.time.delay(3000)
-            run = False  # End the game after completion
+            break  # End the game after completion
         else:
             # Load next level
             world = World(level_num)
@@ -74,14 +75,17 @@ while (run): # this keeps the window up for now, replace with main game loop eve
 
     # Display player's score and health
     draw_text(f'Score: {player.score}', font, (255, 255, 255), 10, 10)
-    draw_text(f'Health: {player.health}', font, (255, 255, 255), 10, 50)
+    draw_text(f'Health: {player.health}', font, (255, 255, 255), 150, 10)
 
     # Check for Game Over
     if game_over:
+        surface = pygame.display.set_mode((screen_width, screen_height))
+        surface.fill((0,0,0))
         draw_text('Game Over', font, (255, 0, 0), screen_width // 2 - 100, screen_height // 2)
+        draw_text('lol', font, (255, 0, 0), screen_width // 2 - 100, screen_height // 2 + 50)
         pygame.display.update()
         pygame.time.delay(3000)  # Pause for 3 seconds
-        run = False  # End the game
+        break  # End the game
 
     # finally, update the screen with everything that has been drawn
     pygame.display.update()
