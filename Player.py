@@ -97,9 +97,7 @@ class Player(pygame.sprite.Sprite):
         # Handle exit collision (no delay needed here)
         if self.check_exit_collisions(world.exit_group):
             self.score += 100  # Award score for level completion
-            #TODO:Move to new level
             return 'level_completed' # Level completed, but not a game over
-
         return False
 
     def check_tile_collisions(self, world):
