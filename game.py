@@ -32,12 +32,9 @@ def draw_text(text, font, color, x, y):
 player = Player(50,500)
 
 # initialise world
+max_levels = 4
 level_num = 4
 world = World(level_num)
-
-blob_group = pygame.sprite.Group()  # Add actual enemy blobs to this group
-lava_group = pygame.sprite.Group()  # Add lava tiles to this group
-exit_group = pygame.sprite.Group()  # Add the exit object to this group
 
 game_over = False
 
@@ -57,8 +54,23 @@ while (run): # this keeps the window up for now, replace with main game loop eve
     player.draw(screen)
     
     # update the player and the world
-    game_over = player.update(game_over, screen, world, blob_group, lava_group, exit_group)
+    game_over = player.update(game_over, screen, world)
     world.update()
+
+    # Handle level completion or game over
+    if game_over == 'level_completed':
+        level_num += 1
+        if level_num > max_levels:
+            draw_text('Game Completed!', font, (255, 255, 0), screen_width // 2 - 100, screen_height // 2)
+            pygame.display.update()
+            pygame.time.delay(3000)
+            run = False  # End the game after completion
+        else:
+            # Load next level
+            world = World(level_num)
+            player.rect.x = 50  # Reset player position
+            player.rect.y = 500
+            game_over = False  # Reset game_over for the new level
 
     # Display player's score and health
     draw_text(f'Score: {player.score}', font, (255, 255, 255), 10, 10)
