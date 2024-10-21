@@ -33,7 +33,7 @@ player = Player(50,500)
 
 # initialise world
 max_levels = 4
-level_num = 4
+level_num = 0
 world = World(level_num)
 
 game_over = False
