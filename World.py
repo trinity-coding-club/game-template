@@ -3,10 +3,10 @@ from os import path
 import csv
 
 from world_platform import Platform
-from enemy import Enemy
-from lava import Lava
-from exit import Exit
-from coin import Coin
+from Enemy import Enemy
+from Lava import Lava
+from Exit import Exit
+from Coin import Coin
 
 class World():
     """

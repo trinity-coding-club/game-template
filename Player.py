@@ -2,25 +2,26 @@ import pygame
 
 class Player(pygame.sprite.Sprite):
     
-    # Contructor
+    # Constructor
     def __init__(self, x, y, jump_fx=None, game_over_fx=None):
         super().__init__()
         self.images_right, self.images_left, self.dead_image = self.load_player_images()
         self.jump_fx = jump_fx
         self.game_over_fx = game_over_fx
+        self.score = 0
+        self.health = 100
         self.reset(x, y)
 
     
     # Runs in main game loop
-    def update(self, game_over, screen, world):
-         #add this into args^ world, blob_group, lava_group, exit_group, platform_group,
-        if game_over == 0:
+    def update(self, game_over, screen, world, blob_group, lava_group, exit_group):
+        if not game_over:
             self.handle_input()
             self.handle_animation()
             self.apply_gravity()
-            game_over = self.check_collisions(world)
+            game_over = self.check_collisions(world, blob_group, lava_group, exit_group)
             self.update_position()
-        elif game_over == -1:
+        else:
             self.handle_game_over()
         
         self.draw(screen)
@@ -71,21 +72,30 @@ class Player(pygame.sprite.Sprite):
         self.vel_y = min(self.vel_y + 1, 10)
         self.dy = self.vel_y
 
-    def check_collisions(self, world):
+    def check_collisions(self, world, blob_group, lava_group, exit_group):
         self.in_air = True
-        # Defo simplify this to general enemy collsion
-        # game_over = self.check_enemy_collisions(blob_group) or \
-        #             self.check_enemy_collisions(lava_group) or \
-        #             self.check_exit_collisions(exit_group)
-
-
-
+    
         #Line below cause player not to load
         self.check_tile_collisions(world)
         self.check_platform_collisions(world.get_platform_group())
 
-        #Make game over bool?
-        game_over =0
+        # Handle enemy collisions (e.g., blobs, lava)
+        if self.check_enemy_collisions(blob_group) or self.check_enemy_collisions(lava_group):
+            self.health -= 20  # Take damage on enemy collision
+            if self.health <= 0:
+                return True  # Game over (health is zero or less)
+
+        # Handle exit collision (e.g., reaching the exit)
+        if self.check_exit_collisions(exit_group):
+            self.score += 100  # Award score for level completion
+            return False  # Level completed, but not a game over
+
+        # Handle exit collision (e.g., reaching the exit)
+        if self.check_exit_collisions(exit_group):
+            self.score += 100  # Award score for level completion
+            return False # Level completed
+
+        game_over = False
         return game_over
 
     def check_tile_collisions(self, world):
