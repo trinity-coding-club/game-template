@@ -1,19 +1,12 @@
 # Trinity Academy Platformer
 
-
-
-## Goals
-
-
-
 <div align="center">
 
 [![](https://img.shields.io/badge/Made_with-python-yellow?style=for-the-badge&logo=python)](https://www.python.org/ "Python")
 
 </div>
 
-
-### To run this project :
+## Setup
 
 Clone the project:
 
@@ -23,6 +16,11 @@ Install all the requirements:
 
 ``` pip install -r requirements.txt ```
 
+## Session Plans
 
-
-
+### Session 1
+- Github + Python setup
+  - `python -m venv env` to create virtual environment
+  - `./env/Scripts/activate` to activate virtual environment
+- A quick walkthrough of the codebase
+- Change player and background sprites
