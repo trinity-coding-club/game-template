@@ -12,6 +12,12 @@ Clone the project:
 
 ```git clone https://github.com/trinity-academy-webdev/game-template ```
 
+Set up virtual environment:
+
+```python -m venv env```
+
+```./env/Scripts/activate```
+
 Install all the requirements:
 
 ``` pip install -r requirements.txt ```
