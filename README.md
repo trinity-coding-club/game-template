@@ -30,3 +30,11 @@ Install all the requirements:
   - `./env/Scripts/activate` to activate virtual environment
 - A quick walkthrough of the codebase
 - Change player and background sprites
+
+### Session 2
+- Changing the controls​
+- Changing movement variables​
+
+### Session 3
+- Creating levels
+- Creating level tiles
