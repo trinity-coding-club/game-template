@@ -38,3 +38,9 @@ Install all the requirements:
 ### Session 3
 - Creating levels
 - Creating level tiles
+
+### Session 4
+- Creating an enemy
+
+### Session 5
+- Creating a collectible
